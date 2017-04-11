@@ -17,7 +17,7 @@ function decode (packet) {
   }
 
   if (!details.publicHeaders['payment-id']) {
-    throw new Error('missing Payment-Id header in "' +
+    throw new Error('missing Payment-Id publicHeader in "' +
       packet + '" got ' +
       JSON.stringify(details) + ' instead.')
   }

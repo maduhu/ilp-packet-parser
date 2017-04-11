@@ -44,7 +44,7 @@ describe('decode', function () {
   it('should throw an error if missing payment-id', function () {
     const packet = 'AX8AAAAAAAAAZAtleGFtcGxlLmJvYmlQU0svMS4wCk5vbmNlOiBpWmI3R3hmZkdFOEV0bUcwNm5WTmhRCkVuY3J5cHRpb246IG5vbmUKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKaGVsbG8gd29ybGQA'
 
-    assert.throws(() => decode(packet), /missing Payment\-Id header/)
+    assert.throws(() => decode(packet), /missing Payment\-Id publicHeader/)
   })
 
   it('should throw an error if missing expires-at', function () {
