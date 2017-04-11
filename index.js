@@ -2,12 +2,37 @@ const ILP = require('ilp')
 const Packet = require('ilp-packet')
 
 function decode (packet) {
-  const details = ILP.PSK.parsePacketAndDetails(packet)
+  if (typeof packet !== 'string' && !Buffer.isBuffer(packet)) {
+    throw new Error('packet must be base64url string or buffer.' +
+      ' got "' + packet + '" instead.')
+  } 
+
+  let details
+  try {
+    details = ILP.PSK.parsePacketAndDetails({ packet })
+  } catch (e) {
+    throw new Error('failed to parse packet from "' +
+      packet + '" got error: "' +
+      e.message)
+  }
+
+  if (!details.headers['paymentid']) {
+    throw new Error('missing PaymentId header in "' +
+      packet + '" got ' +
+      JSON.stringify(details) + ' instead.')
+  }
+
+  if (!details.headers['expires-at']) {
+    throw new Error('missing Expires-At header in "' +
+      packet + '" got ' +
+      JSON.stringify(details) + ' instead.')
+  }
+
   return {
     destinationAccount: details.account,
     destinationAmount: details.amount,
-    paymentId: details.headers.paymentid,
-    expiresAt: details.headers.expiresat,
+    paymentId: details.headers['paymentid'],
+    expiresAt: details.headers['expires-at'],
     memo: details.data.toString('utf8'),
   }
 }
