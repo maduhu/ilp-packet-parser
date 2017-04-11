@@ -7,11 +7,11 @@
 const { decode } = require('ilp-packet-parser')
 
 // packet can be a base64url string or it can be a buffer
-const packet = 'AYHCAAAAAAAAAGQLZXhhbXBsZS5ib2KBq1BTSy8xLjAKTm9uY2U6IHRjck9Z' +
-               'aTBmN3YtTS02TzhGdnQ5VXcKRW5jcnlwdGlvbjogbm9uZQpmb286IGJhcgoK' +
-               'UGF5bWVudElkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFj' +
-               'MGIKRXhwaXJlcy1BdDogMjAxNy0wNC0xMVQxMDoyNDoxOC43NDFaCmZvbzog' +
-               'YmFyCgpoZWxsbyB3b3JsZAA='
+const packet = 'AYGxAAAAAAAAAGQLZXhhbXBsZS5ib2KBmlBTSy8xLjAKTm9uY2U6IHFBdHg' +
+               '1Nk9PUXFyM192dEpvX1JoWkEKRW5jcnlwdGlvbjogbm9uZQpQYXltZW50LU' +
+               'lkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKCkV4c' +
+               'GlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKaGVsbG8gd29y' +
+               'bGQA'
 
 const parsed = decode(packet)
 console.log(parsed)

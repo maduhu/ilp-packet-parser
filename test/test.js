@@ -3,7 +3,7 @@ const assert = require('chai').assert
 
 describe('decode', function () {
   it('should decode a packet with details', function () {
-    const packet = 'AYGwAAAAAAAAAGQLZXhhbXBsZS5ib2KBmVBTSy8xLjAKTm9uY2U6IDBaYjRQUEU3MEg1VHc4MWp2U0l1cFEKRW5jcnlwdGlvbjogbm9uZQoKUGF5bWVudElkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKRXhwaXJlcy1BdDogMjAxNy0wNC0xMVQxMDoyNDoxOC43NDFaCgpoZWxsbyB3b3JsZAA='
+    const packet = 'AYGxAAAAAAAAAGQLZXhhbXBsZS5ib2KBmlBTSy8xLjAKTm9uY2U6IG9zajVadHZGaHlscVVETUZLbXM2R1EKRW5jcnlwdGlvbjogbm9uZQpQYXltZW50LUlkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKaGVsbG8gd29ybGQA'
     const parsed = decode(packet)
 
     assert.deepEqual(parsed, {
@@ -16,7 +16,7 @@ describe('decode', function () {
   })
 
   it('should decode a packet with empty memo', function () {
-    const packet = 'AYGlAAAAAAAAAGQLZXhhbXBsZS5ib2KBjlBTSy8xLjAKTm9uY2U6IDRxV1FHbXlpSFVYNktwMjN0SWlpRHcKRW5jcnlwdGlvbjogbm9uZQoKUGF5bWVudElkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKRXhwaXJlcy1BdDogMjAxNy0wNC0xMVQxMDoyNDoxOC43NDFaCgoA'    
+    const packet = 'AYGmAAAAAAAAAGQLZXhhbXBsZS5ib2KBj1BTSy8xLjAKTm9uY2U6IE9GcV9UckpacGw2YnZndHBfT0FuV0EKRW5jcnlwdGlvbjogbm9uZQpQYXltZW50LUlkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKAA'
     const parsed = decode(packet)
 
     assert.deepEqual(parsed, {
@@ -29,7 +29,7 @@ describe('decode', function () {
   })
 
   it('should not return extra fields in packet', function () {
-    const packet = 'AYHCAAAAAAAAAGQLZXhhbXBsZS5ib2KBq1BTSy8xLjAKTm9uY2U6IDdfLVU4U1RxVjV6aVktVXc3Y29fTUEKRW5jcnlwdGlvbjogbm9uZQpmb286IGJhcgoKUGF5bWVudElkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKRXhwaXJlcy1BdDogMjAxNy0wNC0xMVQxMDoyNDoxOC43NDFaCmZvbzogYmFyCgpoZWxsbyB3b3JsZAA='    
+    const packet = 'AYHDAAAAAAAAAGQLZXhhbXBsZS5ib2KBrFBTSy8xLjAKTm9uY2U6IDIzejN5UThFeEt6ME1pS1Ffd19NeEEKRW5jcnlwdGlvbjogbm9uZQpmb286IGJhcgpQYXltZW50LUlkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKCmZvbzogYmFyCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKaGVsbG8gd29ybGQA'    
     const parsed = decode(packet)
 
     assert.deepEqual(parsed, {
@@ -41,14 +41,14 @@ describe('decode', function () {
     })
   })
 
-  it('should throw an error if missing paymentid', function () {
-    const packet = 'AX8AAAAAAAAAZAtleGFtcGxlLmJvYmlQU0svMS4wCk5vbmNlOiB0RnEzN0xHekVES2htRnM0VTdFdS1RCkVuY3J5cHRpb246IG5vbmUKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKaGVsbG8gd29ybGQA'
+  it('should throw an error if missing payment-id', function () {
+    const packet = 'AX8AAAAAAAAAZAtleGFtcGxlLmJvYmlQU0svMS4wCk5vbmNlOiBpWmI3R3hmZkdFOEV0bUcwNm5WTmhRCkVuY3J5cHRpb246IG5vbmUKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKaGVsbG8gd29ybGQA'
 
-    assert.throws(() => decode(packet), /missing PaymentId header/)
+    assert.throws(() => decode(packet), /missing Payment\-Id header/)
   })
 
   it('should throw an error if missing expires-at', function () {
-    const packet = 'AYGvAAAAAAAAAGQLZXhhbXBsZS5ib2KBmFBTSy8xLjAKTm9uY2U6IGhOM0pQSENQUF9vYWFNeXNpaDJjQXcKRW5jcnlwdGlvbjogbm9uZQoKUGF5bWVudElkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKRXhwaXJlc0F0OiAyMDE3LTA0LTExVDEwOjI0OjE4Ljc0MVoKCmhlbGxvIHdvcmxkAA=='
+    const packet = 'AYGMAAAAAAAAAGQLZXhhbXBsZS5ib2J2UFNLLzEuMApOb25jZTogZ1BwMGF6eHdTSVFZQzRNaFYzN0lRQQpFbmNyeXB0aW9uOiBub25lClBheW1lbnQtSWQ6IDU2MzhiYmFiLTdmMmUtNDg0MC1hYjg3LWVmMGMwMDFkYWMwYgoKCgpoZWxsbyB3b3JsZAA'
 
     assert.throws(() => decode(packet), /missing Expires\-At header/)
   })

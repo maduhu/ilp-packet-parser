@@ -16,8 +16,8 @@ function decode (packet) {
       e.message)
   }
 
-  if (!details.headers['paymentid']) {
-    throw new Error('missing PaymentId header in "' +
+  if (!details.publicHeaders['payment-id']) {
+    throw new Error('missing Payment-Id header in "' +
       packet + '" got ' +
       JSON.stringify(details) + ' instead.')
   }
@@ -31,7 +31,7 @@ function decode (packet) {
   return {
     destinationAccount: details.account,
     destinationAmount: details.amount,
-    paymentId: details.headers['paymentid'],
+    paymentId: details.publicHeaders['payment-id'],
     expiresAt: details.headers['expires-at'],
     memo: details.data.toString('utf8'),
   }
