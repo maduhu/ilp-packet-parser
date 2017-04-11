@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+  node:
+    version: 6.9.1
+test:
+  override:
+    - npm test --coverage
+deployment:
+  production:
+    branch: master
+    commands:
+      # Deployment tasks
+      - cp npmrc-env .npmrc
+      - scripts/ci-deploy.sh
