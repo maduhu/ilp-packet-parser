@@ -1,6 +1,15 @@
 const ILP = require('ilp')
 const Packet = require('ilp-packet')
 
+function tryParse (json) {
+  try {
+    return JSON.parse(json)
+  } catch (e) {
+    if (e.name !== 'SyntaxError') throw e
+    return json
+  }
+}
+
 function decode (packet) {
   if (typeof packet !== 'string' && !Buffer.isBuffer(packet)) {
     throw new Error('packet must be base64url string or buffer.' +
@@ -26,7 +35,7 @@ function decode (packet) {
     destinationAccount: details.account,
     destinationAmount: details.amount,
     paymentId: details.publicHeaders['payment-id'],
-    memo: details.data.toString('utf8'),
+    memo: tryParse(details.data.toString('utf8')),
   }
 
   if (details.headers['expires-at']) {

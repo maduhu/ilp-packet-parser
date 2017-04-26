@@ -15,6 +15,19 @@ describe('decode', function () {
     })
   })
 
+  it('should parse json memo if possible', function () {
+    const packet = 'AYGzAAAAAAAAAGQLZXhhbXBsZS5ib2KBnFBTSy8xLjAKTm9uY2U6IGVzLWNHRjc5NnF3ZzhEWDlad1lZOEEKRW5jcnlwdGlvbjogbm9uZQpQYXltZW50LUlkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKeyJmb28iOiJiYXIifQA'
+    const parsed = decode(packet)
+
+    assert.deepEqual(parsed, {
+      destinationAccount: 'example.bob',
+      destinationAmount: '100',
+      paymentId: '5638bbab-7f2e-4840-ab87-ef0c001dac0b',
+      expiresAt: '2017-04-11T10:24:18.741Z',
+      memo: { foo: 'bar' }
+    })
+  })
+
   it('should decode a packet with empty memo', function () {
     const packet = 'AYGmAAAAAAAAAGQLZXhhbXBsZS5ib2KBj1BTSy8xLjAKTm9uY2U6IE9GcV9UckpacGw2YnZndHBfT0FuV0EKRW5jcnlwdGlvbjogbm9uZQpQYXltZW50LUlkOiA1NjM4YmJhYi03ZjJlLTQ4NDAtYWI4Ny1lZjBjMDAxZGFjMGIKCkV4cGlyZXMtQXQ6IDIwMTctMDQtMTFUMTA6MjQ6MTguNzQxWgoKAA'
     const parsed = decode(packet)
