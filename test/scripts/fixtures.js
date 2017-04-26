@@ -49,7 +49,7 @@ console.log('should throw an error if missing payment-id',
     })
   }).toString('base64'))
 
-console.log('should throw an error if missing expires-at',
+console.log('should not throw an error if missing expires-at',
   Packet.serializeIlpPayment({
     account: 'example.bob',
     amount: '100',

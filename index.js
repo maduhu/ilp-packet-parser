@@ -22,19 +22,18 @@ function decode (packet) {
       JSON.stringify(details) + ' instead.')
   }
 
-  if (!details.headers['expires-at']) {
-    throw new Error('missing Expires-At header in "' +
-      packet + '" got ' +
-      JSON.stringify(details) + ' instead.')
-  }
-
-  return {
+  const fields = {
     destinationAccount: details.account,
     destinationAmount: details.amount,
     paymentId: details.publicHeaders['payment-id'],
-    expiresAt: details.headers['expires-at'],
     memo: details.data.toString('utf8'),
   }
+
+  if (details.headers['expires-at']) {
+    fields.expiresAt = details.headers['expires-at']
+  }
+
+  return fields
 }
 
 module.exports = { decode }
