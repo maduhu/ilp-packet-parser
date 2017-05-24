@@ -34,13 +34,15 @@ parsed = decode(packet)
 ```
 
 - `packet` (argument): A Buffer or [base64url](https://tools.ietf.org/html/rfc4648#section-5)-encoded String representing an [ILP Packet][] with [PSK data][].
-- `parsed` (return value): An Object with the ILP Packet's data.
+- `parsed` (return value): An Object with the ILP Packet's deciphered data.
+
+**Note:** When using [IPR][] instead of PSK, the data field is expected to be opaque to anyone other than the receiver. However, if the receiver formats the Interledger Packet's arbitrary `data` in the same format as [PSK data][], other parties can use this tool to inspect the data.
 
 The return value includes the following fields:
 
 | Field                | Type             | Description                    |
 |:---------------------|:-----------------|:-------------------------------|
-| `destinationAccount` | String           | The [ILP Address][] of the account of the ultimate beneficiary to the ILP payment this packet describes. |
+| `destinationAccount` | String           | The [ILP Address][] of the ultimate beneficiary to the ILP payment this packet describes. |
 | `destinationAmount`  | String           | The amount to be credited to the ultimate beneficiary of the ILP payment. This is a 64-bit unsigned integer represented as a string so that it does not lose precision. The scale and currency/asset definition for this amount is defined by the beneficiary's ledger. |
 | `paymentId`          | String           | The LeveL One Project **trace ID** for the payment this packet represents. |
 | `expiresAt`          | String           | _(Optional)_ The expiration for this ILP payment, if the packet contains one. |
