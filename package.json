@@ -7,7 +7,7 @@
     "test": "istanbul test -- _mocha"
   },
   "author": "",
-  "license": "ISC",
+  "license": "CC-BY-SA-4.0",
   "dependencies": {
     "co": "^4.6.0",
     "ilp": "^10.1.0",
